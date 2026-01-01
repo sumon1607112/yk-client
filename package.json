@@ -1,13 +1,18 @@
 {
   "name": "yk-client",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "start:shell": "ng serve shell --port 7000 --open",
+  "start:auth": "ng serve auth --port 7001 --open",
+  "run:all": "concurrently --kill-others -n \"SHELL,AUTH\" -c \"blue,magenta\" \"npm run start:shell\" \"npm run start:auth\"",
+  "build:all": "ng build shell --watch && ng build auth --watch"
+},
+
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
@@ -41,6 +46,7 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "concurrently": "^9.2.1",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"

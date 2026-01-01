@@ -99,7 +99,9 @@
 					},
 					"defaultConfiguration": "development",
 					"options": {
-						"port": 7000
+						"port": 7000,
+						"open": true,
+						"host": "localhost"
 					}
 				}
 			}
@@ -197,7 +199,9 @@
 					},
 					"defaultConfiguration": "development",
 					"options": {
-						"port": 7001
+						"port": 7001,
+						"open": true,
+						"host": "localhost"
 					}
 				}
 			}

@@ -1,59 +1,20 @@
-# YkClient
+🚀 Angular 21 Micro Frontend Ecosystem
+This project is a scalable, enterprise-grade Micro Frontend (MFE) architecture built with Angular 21 and Native Federation. It utilizes browser-native ES Modules (ESM) and Import Maps for runtime integration, replacing the older Webpack-based Module Federation.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+🏗 Architecture Overview
+The system is currently composed of two main parts:
 
-## Development server
+Shell (Host): The main container application. It handles the primary layout, navigation, and dynamically orchestrates the loading of remote modules.
 
-To start a local development server, run:
+Auth (Remote): A standalone micro-app responsible for user authentication, login, and registration.
 
-```bash
-ng serve
-```
+Future-Proofing: This architecture is designed to support additional remotes (e.g., Product App, Billing, Dashboard) without requiring a full rebuild of the Shell.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+🛠 Tech Stack
+Framework: Angular 21 (Zoneless/Signals ready)
 
-## Code scaffolding
+MFE Orchestration: @angular-architects/native-federation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Build Tool: esbuild (via Angular Application Builder)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Integration: Native Import Maps

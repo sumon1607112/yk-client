@@ -1,0 +1,23 @@
+.register-page {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 1.5rem;
+	background: linear-gradient(145deg, #f3f4f6 0%, #eef2ff 100%);
+}
+
+.register-card {
+	width: min(100%, 440px);
+	border-radius: 1rem;
+}
+
+.register-form {
+	margin-top: 1rem;
+	display: grid;
+	gap: 0.9rem;
+}
+
+mat-form-field,
+button[type='submit'] {
+	width: 100%;
+}

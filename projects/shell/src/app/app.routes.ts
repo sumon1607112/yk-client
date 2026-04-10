@@ -3,8 +3,8 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path:'',
-        loadComponent: ()=>
-           loadRemoteModule('auth', './Component').then(m => m.App)
+        path: '',
+        loadChildren: () =>
+            loadRemoteModule('auth', './Routes').then(m => m.routes)
     }
 ];

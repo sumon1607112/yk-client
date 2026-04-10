@@ -48,7 +48,7 @@ export class Register implements OnInit {
       role: ['', Validators.required],
     });
   }
-  
+
   togglePasswordVisibility(): void {
     this.hidePassword.set(!this.hidePassword());
   }

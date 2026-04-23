@@ -1,0 +1,27 @@
+{
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.10.0",
+    "generators": {
+      "auth": {
+        "generatorName": "typescript-angular",
+        "inputSpec": "http://localhost:50001/openapi/v1.json",
+        "output": "api-contracts/auth",
+        "additionalProperties": {
+          "ngVersion": "21",
+          "providedIn": "root",
+          "withInterfaces": true,
+          "stringEnums": true,
+          "enumPropertyNaming": "UPPERCASE",
+          "httpContext": true
+        },
+        "globalProperty": {
+          "apiTests": "false",
+          "modelTests": "false",
+          "apiDocs": "false",
+          "modelDocs": "false"
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,11 @@
     "start:shell": "ng serve shell --port 7000",
     "start:auth": "ng serve auth --port 7001",
     "build:all": "ng build shell --watch & ng build auth --watch",
-    "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"npm run start:shell\""
+    "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"npm run start:shell\"",
+    "preapi:generate:auth": "node -e \"require('fs').rmSync('api-contracts/auth', {recursive:true, force:true})\"",
+    "api:generate:auth": "openapi-generator-cli generate --generator-key auth",
+    "preapi:generate": "node -e \"require('fs').rmSync('api-contracts', {recursive:true, force:true})\"",
+    "api:generate": "openapi-generator-cli generate"
   },
   "prettier": {
     "printWidth": 100,
@@ -51,6 +55,7 @@
     "jsdom": "^27.1.0",
     "prettier": "^3.8.3",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "@openapitools/openapi-generator-cli": "^2.13.0"
   }
 }

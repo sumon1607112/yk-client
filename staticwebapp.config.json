@@ -1,0 +1,15 @@
+{
+    "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": [
+            "/auth-remote/*",
+            "*.js",
+            "*.css",
+            "*.json",
+            "*.png",
+            "*.jpg",
+            "*.svg",
+            "*.ico"
+        ]
+    }
+}

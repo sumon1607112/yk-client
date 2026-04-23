@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:shell": "ng serve shell --port 7000 --open",
-    "start:auth": "ng serve auth --port 7001 --open",
-    "run:all": "concurrently --kill-others -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:shell\" \"npm run start:auth\"",
-    "build:all": "concurrently \"ng build shell --watch\" \"ng build auth --watch\""
+    "start:shell": "ng serve shell --port 7000",
+    "start:auth": "ng serve auth --port 7001",
+    "build:all": "ng build shell --watch & ng build auth --watch",
+    "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"npm run start:shell\""
   },
   "prettier": {
     "printWidth": 100,
@@ -49,6 +49,7 @@
     "@angular/compiler-cli": "^21.0.0",
     "concurrently": "^9.2.1",
     "jsdom": "^27.1.0",
+    "prettier": "^3.8.3",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

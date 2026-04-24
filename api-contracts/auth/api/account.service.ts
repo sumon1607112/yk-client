@@ -24,16 +24,13 @@ import { RegisterResponseDto } from '../model/registerResponseDto';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    AccountServiceInterface
-} from './account.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService implements AccountServiceInterface {
+export class AccountService {
 
     protected basePath = 'https://localhost:50001';
     public defaultHeaders = new HttpHeaders();

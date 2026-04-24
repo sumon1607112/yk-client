@@ -3,7 +3,6 @@
 README.md
 api.module.ts
 api/account.service.ts
-api/account.serviceInterface.ts
 api/api.ts
 configuration.ts
 encoder.ts

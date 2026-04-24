@@ -10,7 +10,6 @@
         "additionalProperties": {
           "ngVersion": "21",
           "providedIn": "root",
-          "withInterfaces": true,
           "stringEnums": true,
           "enumPropertyNaming": "UPPERCASE",
           "httpContext": true

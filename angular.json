@@ -27,6 +27,9 @@
                         "testing": {
                             "target": "shell:esbuild:testing"
                         },
+                        "dev-deployed": {
+                            "target": "shell:esbuild:dev-deployed"
+                        },
                         "development": {
                             "target": "shell:esbuild:development",
                             "dev": true
@@ -97,6 +100,15 @@
                             "optimization": true,
                             "outputHashing": "all"
                         },
+                        "dev-deployed": {
+                            "define": {
+                                "__API_URL__": "'https://yk-backend-dev.up.railway.app'",
+                                "__PRODUCTION__": "false",
+                                "__MANIFEST_PATH__": "'federation.manifest.dev.json'"
+                            },
+                            "optimization": true,
+                            "outputHashing": "all"
+                        },
                         "development": {
                             "define": {
                                 "__API_URL__": "'http://localhost:50000'",
@@ -146,6 +158,12 @@
                     "configurations": {
                         "production": {
                             "target": "auth:esbuild:production"
+                        },
+                        "testing": {
+                            "target": "auth:esbuild:testing"
+                        },
+                        "dev-deployed": {
+                            "target": "auth:esbuild:dev-deployed"
                         },
                         "development": {
                             "target": "auth:esbuild:development",
@@ -200,6 +218,14 @@
                                     "maximumError": "8kB"
                                 }
                             ],
+                            "outputHashing": "all"
+                        },
+                        "testing": {
+                            "optimization": true,
+                            "outputHashing": "all"
+                        },
+                        "dev-deployed": {
+                            "optimization": true,
                             "outputHashing": "all"
                         },
                         "development": {

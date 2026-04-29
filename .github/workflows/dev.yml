@@ -29,10 +29,10 @@ jobs:
         run: npm ci
 
       - name: Build auth remote
-        run: npx ng build auth --configuration=development
+        run: npx ng build auth --configuration=production
 
       - name: Build shell
-        run: npx ng build shell --configuration=development
+        run: npx ng build shell --configuration=dev-deployed
 
       - name: Combine builds
         run: |

@@ -27,6 +27,9 @@
                         "testing": {
                             "target": "shell:esbuild:testing"
                         },
+                        "dev-deployed": {
+                            "target": "shell:esbuild:dev-deployed"
+                        },
                         "development": {
                             "target": "shell:esbuild:development",
                             "dev": true
@@ -93,6 +96,15 @@
                                 "__API_URL__": "'https://yk-backend-test.up.railway.app'",
                                 "__PRODUCTION__": "false",
                                 "__MANIFEST_PATH__": "'federation.manifest.test.json'"
+                            },
+                            "optimization": true,
+                            "outputHashing": "all"
+                        },
+                        "dev-deployed": {
+                            "define": {
+                                "__API_URL__": "'https://yk-backend-dev.up.railway.app'",
+                                "__PRODUCTION__": "false",
+                                "__MANIFEST_PATH__": "'federation.manifest.dev.json'"
                             },
                             "optimization": true,
                             "outputHashing": "all"

@@ -159,6 +159,12 @@
                         "production": {
                             "target": "auth:esbuild:production"
                         },
+                        "testing": {
+                            "target": "auth:esbuild:testing"
+                        },
+                        "dev-deployed": {
+                            "target": "auth:esbuild:dev-deployed"
+                        },
                         "development": {
                             "target": "auth:esbuild:development",
                             "dev": true
@@ -212,6 +218,14 @@
                                     "maximumError": "8kB"
                                 }
                             ],
+                            "outputHashing": "all"
+                        },
+                        "testing": {
+                            "optimization": true,
+                            "outputHashing": "all"
+                        },
+                        "dev-deployed": {
+                            "optimization": true,
                             "outputHashing": "all"
                         },
                         "development": {

@@ -9,6 +9,14 @@ on:
     branches:
       - main
 
+# ─── Change these in one place if paths ever move ───
+env:
+  NODE_VERSION: "22"
+  COMBINED_OUTPUT: "dist/combined"
+  AUTH_REMOTE_FOLDER: "auth-remote"
+  SHELL_BUILD_CONFIG: "production"
+  AUTH_BUILD_CONFIG: "production"
+
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
@@ -23,25 +31,79 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build auth remote
-        run: npx ng build auth --configuration=production
+        run: npx ng build auth --configuration=${{ env.AUTH_BUILD_CONFIG }}
 
       - name: Build shell
-        run: npx ng build shell --configuration=production
+        run: npx ng build shell --configuration=${{ env.SHELL_BUILD_CONFIG }}
+
+      - name: Resolve output paths
+        id: paths
+        run: |
+          SHELL_OUT=$(node -e "
+            const cfg = require('./angular.json');
+            const out = cfg.projects.shell?.architect?.esbuild?.options?.outputPath || 'dist/shell';
+            console.log(out + '/browser');
+          ")
+          AUTH_OUT=$(node -e "
+            const cfg = require('./angular.json');
+            const out = cfg.projects.auth?.architect?.esbuild?.options?.outputPath || 'dist/auth';
+            console.log(out + '/browser');
+          ")
+          echo "shell_out=$SHELL_OUT" >> $GITHUB_OUTPUT
+          echo "auth_out=$AUTH_OUT" >> $GITHUB_OUTPUT
+
+      - name: Validate build outputs
+        run: |
+          SHELL_OUT="${{ steps.paths.outputs.shell_out }}"
+          AUTH_OUT="${{ steps.paths.outputs.auth_out }}"
+
+          ERROR=0
+
+          if [ ! -d "$SHELL_OUT" ]; then
+            echo "::error::Shell build output not found at '$SHELL_OUT'. Check outputPath in angular.json or build logs above."
+            ERROR=1
+          else
+            echo "✅ Shell output found at: $SHELL_OUT ($(find $SHELL_OUT -type f | wc -l) files)"
+          fi
+
+          if [ ! -d "$AUTH_OUT" ]; then
+            echo "::error::Auth build output not found at '$AUTH_OUT'. Check outputPath in angular.json or build logs above."
+            ERROR=1
+          else
+            echo "✅ Auth output found at: $AUTH_OUT ($(find $AUTH_OUT -type f | wc -l) files)"
+          fi
+
+          if [ ! -f "staticwebapp.config.json" ]; then
+            echo "::warning::staticwebapp.config.json not found in repo root. Deployment may not route correctly."
+          fi
+
+          if [ ! -f ".swaignore" ]; then
+            echo "::warning::.swaignore not found in repo root."
+          fi
+
+          if [ $ERROR -eq 1 ]; then
+            exit 1
+          fi
 
       - name: Combine builds
         run: |
-          mkdir -p dist/combined
-          cp -r dist/shell/browser/* dist/combined/
-          mkdir -p dist/combined/auth-remote
-          cp -r dist/auth/browser/* dist/combined/auth-remote/
-          cp staticwebapp.config.json dist/combined/
-          cp .swaignore dist/combined/
+          SHELL_OUT="${{ steps.paths.outputs.shell_out }}"
+          AUTH_OUT="${{ steps.paths.outputs.auth_out }}"
+
+          mkdir -p ${{ env.COMBINED_OUTPUT }}
+          cp -r $SHELL_OUT/* ${{ env.COMBINED_OUTPUT }}/
+          mkdir -p ${{ env.COMBINED_OUTPUT }}/${{ env.AUTH_REMOTE_FOLDER }}
+          cp -r $AUTH_OUT/* ${{ env.COMBINED_OUTPUT }}/${{ env.AUTH_REMOTE_FOLDER }}/
+          [ -f staticwebapp.config.json ] && cp staticwebapp.config.json ${{ env.COMBINED_OUTPUT }}/
+          [ -f .swaignore ] && cp .swaignore ${{ env.COMBINED_OUTPUT }}/
+
+          echo "📦 Combined output ready at ${{ env.COMBINED_OUTPUT }} ($(find ${{ env.COMBINED_OUTPUT }} -type f | wc -l) files total)"
 
       - name: Build And Deploy
         id: builddeploy
@@ -50,7 +112,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROD }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "dist/combined"
+          app_location: ${{ env.COMBINED_OUTPUT }}
           api_location: ""
           output_location: ""
           skip_app_build: true

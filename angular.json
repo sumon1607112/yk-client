@@ -2,7 +2,8 @@
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "cli": {
-        "packageManager": "npm"
+        "packageManager": "npm",
+        "analytics": false
     },
     "newProjectRoot": "projects",
     "projects": {
@@ -73,7 +74,7 @@
                     "configurations": {
                         "production": {
                             "define": {
-                                "__API_URL__": "'https://yk-backend-production.up.railway.app'",
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
                                 "__PRODUCTION__": "true",
                                 "__MANIFEST_PATH__": "'federation.manifest.prod.json'"
                             },
@@ -93,7 +94,7 @@
                         },
                         "testing": {
                             "define": {
-                                "__API_URL__": "'https://yk-backend-test.up.railway.app'",
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
                                 "__PRODUCTION__": "false",
                                 "__MANIFEST_PATH__": "'federation.manifest.test.json'"
                             },
@@ -102,7 +103,7 @@
                         },
                         "dev-deployed": {
                             "define": {
-                                "__API_URL__": "'https://yk-backend-dev.up.railway.app'",
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
                                 "__PRODUCTION__": "false",
                                 "__MANIFEST_PATH__": "'federation.manifest.dev.json'"
                             },
@@ -206,6 +207,10 @@
                     },
                     "configurations": {
                         "production": {
+                            "define": {
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
+                                "__PRODUCTION__": "true"
+                            },
                             "budgets": [
                                 {
                                     "type": "initial",
@@ -221,14 +226,26 @@
                             "outputHashing": "all"
                         },
                         "testing": {
+                            "define": {
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
+                                "__PRODUCTION__": "false"
+                            },
                             "optimization": true,
                             "outputHashing": "all"
                         },
                         "dev-deployed": {
+                            "define": {
+                                "__API_URL__": "'https://yk-gateway-api-bkgwa8e6dfgta4hz.eastasia-01.azurewebsites.net'",
+                                "__PRODUCTION__": "false"
+                            },
                             "optimization": true,
                             "outputHashing": "all"
                         },
                         "development": {
+                            "define": {
+                                "__API_URL__": "'http://localhost:50000'",
+                                "__PRODUCTION__": "false"
+                            },
                             "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true

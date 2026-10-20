@@ -1,5 +1,5 @@
 /**
- * YK.WebAPI | v1
+ * YK.Auth.WebAPI | v1
  *
  * 
  *
@@ -7,10 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RegisterRequestDto } from './registerRequestDto';
+import { CreateRoleRequestDto } from './createRoleRequestDto';
 
 
-export interface RegisterCommand { 
-    registerRequest: RegisterRequestDto;
+export interface CreateRoleCommand { 
+    createRoleRequest: CreateRoleRequestDto;
 }
 

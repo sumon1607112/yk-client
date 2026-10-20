@@ -1,5 +1,5 @@
 /**
- * YK.WebAPI | v1
+ * YK.Auth.WebAPI | v1
  *
  * 
  *
@@ -7,11 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CreateUserRequest } from './createUserRequest';
 
 
 export interface RegisterRequestDto { 
-    phone?: string;
-    password?: string;
-    role?: number;
+    createUserRequest?: CreateUserRequest;
 }
 

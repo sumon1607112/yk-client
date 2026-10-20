@@ -11,10 +11,8 @@
     "start:auth": "ng serve auth --port 7001",
     "build:all": "ng build shell --watch & ng build auth --watch",
     "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"npm run start:shell\"",
-    "preapi:generate:auth": "node -e \"require('fs').rmSync('api-contracts/auth', {recursive:true, force:true})\"",
-    "api:generate:auth": "openapi-generator-cli generate --generator-key auth",
-    "preapi:generate": "node -e \"require('fs').rmSync('api-contracts', {recursive:true, force:true})\"",
-    "api:generate": "openapi-generator-cli generate"
+    "api:generate:auth": "node -e \"require('fs').rmSync('api-contracts/auth', {recursive:true, force:true})\" && openapi-generator-cli generate --generator-key auth",
+    "api:generate": "npm run api:generate:auth"
   },
   "prettier": {
     "printWidth": 100,

@@ -10,7 +10,7 @@
     "start:shell": "ng serve shell --port 7000",
     "start:auth": "ng serve auth --port 7001",
     "build:all": "ng build shell --watch & ng build auth --watch",
-    "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"npm run start:shell\"",
+    "run:all": "concurrently -n \"AUTH,SHELL\" -c \"blue,magenta\" \"npm run start:auth\" \"wait-on http-get://localhost:7001/remoteEntry.json && npm run start:shell\"",
     "api:generate:auth": "node -e \"require('fs').rmSync('api-contracts/auth', {recursive:true, force:true})\" && openapi-generator-cli generate --generator-key auth",
     "api:generate": "npm run api:generate:auth"
   },
@@ -49,11 +49,12 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "@openapitools/openapi-generator-cli": "^2.13.0",
     "concurrently": "^9.2.1",
     "jsdom": "^27.1.0",
     "prettier": "^3.8.3",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8",
-    "@openapitools/openapi-generator-cli": "^2.13.0"
+    "wait-on": "^9.5.1"
   }
 }

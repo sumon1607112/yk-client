@@ -14,6 +14,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "rootDir": "./",
     "paths": {
       "@yk/api/auth": [
         "./api-contracts/auth/index.ts"
